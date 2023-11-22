@@ -3,8 +3,8 @@ import socket
 import logging
 import threading
 logging.basicConfig(level = logging.INFO)
-SERVER_IP = "1.1.1.1"
-SERVER_PORT = 8889
+SERVER_IP = "127.0.0.1"
+SERVER_PORT = 10000
 
 
 encryption_key_hex = "8b52aec7d4b5229f"
@@ -265,7 +265,7 @@ def start_client():
         receive_thread.start()
 
         while True:
-            message = input()
+            message = input("Message to send : ")
             logging.info(f"[CLIENT] {message}")
             sock.sendall(to_des(message).encode())
     except Exception as e:

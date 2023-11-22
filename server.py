@@ -5,7 +5,7 @@ import logging
 import time
 import sys
 logging.basicConfig(level = logging.INFO)
-SERVER_PORT = 8889
+SERVER_PORT = 10000
 
 # Server socket code
 class ProcessTheClient(threading.Thread):
