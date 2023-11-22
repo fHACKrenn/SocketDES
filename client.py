@@ -216,7 +216,7 @@ def des_algorithm(key_hex = "e3b98d45a5b38a7f", plaintext_hex = "1f05d3c2872a59b
 
 
 def to_des(message):
-  plaintext = message or "test socket encrypt des"
+  plaintext = message
   plaintext += '\x00' * (((64 - (len(plaintext) * 8) % 64) + 7) // 8)
   plaintext_hex = plaintext.encode().hex()
 
@@ -228,7 +228,7 @@ def to_des(message):
       # print(f"64-bit block {i + 1} - Plaintext: {plaintext_blocks[i]}")
       plaintext_hex, encrypted_ciphertext, decrypted_plaintext = des_algorithm(key_hex = encryption_key_hex, plaintext_hex = plaintext_blocks[i])
       resulting_ciphertext += encrypted_ciphertext
-  print("Encrypted blocks:", resulting_ciphertext)
+  print("Encrypted message : ", resulting_ciphertext)
   return resulting_ciphertext
 
 def from_des(message):
