@@ -242,7 +242,7 @@ def from_des(message):
         # print(f"64-bit block {i + 1} - Ciphertext: {ciphertext_blocks[i]}")
         plaintext_hex, encrypted_ciphertext, decrypted_plaintext = des_algorithm(key_hex = decryption_key_hex, ciphertext_hex = ciphertext_blocks[i])
         resulting_plaintext += decrypted_plaintext
-    print("Decrypted blocks:", bytes.fromhex(resulting_plaintext).decode())
+    print("\nDecrypted message:", bytes.fromhex(resulting_plaintext).decode())
     return bytes.fromhex(resulting_plaintext).decode()
 
 # Client socket code
@@ -266,7 +266,7 @@ def start_client():
 
         while True:
             message = input("Message to send : ")
-            logging.info(f"[CLIENT] {message}")
+            logging.info(f"Message is '{message}'")
             sock.sendall(to_des(message).encode())
     except Exception as e:
         logging.warning(f"error: {str(e)}")
