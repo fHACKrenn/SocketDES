@@ -242,7 +242,6 @@ def from_des(message):
         # print(f"64-bit block {i + 1} - Ciphertext: {ciphertext_blocks[i]}")
         plaintext_hex, encrypted_ciphertext, decrypted_plaintext = des_algorithm(key_hex = decryption_key_hex, ciphertext_hex = ciphertext_blocks[i])
         resulting_plaintext += decrypted_plaintext
-    print("\nDecrypted message:", bytes.fromhex(resulting_plaintext).decode())
     return bytes.fromhex(resulting_plaintext).decode()
 
 # Client socket code
@@ -252,7 +251,10 @@ def receive_messages(sock):
         if not recv_data:
             raise RuntimeError("connection closed by the server")
         data = eval(recv_data.decode())
-        logging.info(f"[SERVER] {data['sender_ip']}:{data['sender_port']} --- {from_des(data['message'])}")
+        print("\n")
+        logging.info(f"[SERVER] From {data['sender_ip']}:{data['sender_port']} --- {from_des(data['message'])}")
+        print("Decrypted message:", from_des(data['message']))
+        print("Message to send : ")
 
 def start_client():
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -266,7 +268,7 @@ def start_client():
 
         while True:
             message = input("Message to send : ")
-            logging.info(f"Message is '{message}'")
+            # logging.info(f"Message is '{message}'")
             sock.sendall(to_des(message).encode())
     except Exception as e:
         logging.warning(f"error: {str(e)}")
