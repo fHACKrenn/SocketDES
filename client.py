@@ -252,9 +252,8 @@ def receive_messages(sock):
             raise RuntimeError("connection closed by the server")
         data = eval(recv_data.decode())
         print("\n")
-        logging.info(f"[SERVER] From {data['sender_ip']}:{data['sender_port']} --- {from_des(data['message'])}")
+        logging.info(f"[SERVER] From {data['sender_ip']}:{data['sender_port']} --- {data['message']}")
         print("Decrypted message:", from_des(data['message']))
-        print("Message to send : ")
 
 def start_client():
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
